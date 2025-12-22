@@ -1,0 +1,124 @@
+import { motion } from 'framer-motion'
+import { useInView } from 'framer-motion'
+import { useRef } from 'react'
+import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa'
+
+const Experience = () => {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  const experiences = [
+    {
+      title: 'Software Development Intern',
+      company: 'ITCON Services',
+      location: 'Vienna, VA',
+      period: 'Jun 2025 - Aug 2025',
+      description: [
+        'Designed and deployed Microsoft Power Apps and Power Automate solutions to streamline FEMA subcontractor record management and data integration, reducing processing time and enhancing overall workflow efficiency across teams',
+        'Automated workflows that reduced manual data entry by over 40% and introduced automatic error detection, integrating Power Platform solutions with SharePoint and Microsoft Dataverse, enhancing system efficiency and scalability',
+        'Collaborated with cross-functional teams to deliver user-friendly, accessible applications, integrate external APIs, and provide technical support and training to 50+ end-users, ensuring long-term system reliability and successful adoption',
+      ],
+    },
+    {
+      title: 'Intern',
+      company: 'Contour Software',
+      location: 'Karachi, Pakistan',
+      period: 'Jul 2024 - Aug 2024',
+      description: [
+        'Designed a team selection model and business plan for a sports league, optimizing player combinations and replacements for 100+ athletes, receiving positive feedback from 5 key stakeholders for its strategic value following presentation',
+        'Collaborated with QA engineers to design and execute test cases, leveraging Jira for bug tracking, sprint planning, and backlog management, while gaining experience with Agile methodologies and improving overall product quality',
+      ],
+    },
+    {
+      title: 'IT User Support Specialist',
+      company: 'Pennsylvania State University',
+      location: 'State College, PA',
+      period: 'Dec 2023 - Present',
+      description: [
+        'Provided technical support for 20+ weekly hardware, software, and network issues, leveraging tools such as ServiceNow, Amazon Connect, Office 365, and Digital Identity Management Center to ensure rapid resolution and minimize downtime',
+        'Performed diagnostics, system configurations, software installations, and account management for both Windows and macOS environments, achieving a 95%+ user satisfaction rate across diverse student and faculty support requests',
+      ],
+    },
+  ]
+
+  return (
+    <section id="experience" ref={ref} className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+            <span className="text-gradient">Experience</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
+        </motion.div>
+
+        <div className="relative">
+          {/* Timeline line */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500 to-pink-500 transform md:-translate-x-1/2"></div>
+
+          <div className="space-y-12">
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className={`relative flex items-center ${
+                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                }`}
+              >
+                {/* Timeline dot */}
+                <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-purple-500 rounded-full border-4 border-gray-900 transform md:-translate-x-1/2 z-10"></div>
+
+                {/* Content card */}
+                <div
+                  className={`ml-20 md:ml-0 md:w-5/12 ${
+                    index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'
+                  }`}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="glass rounded-xl p-6 card-hover"
+                  >
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg">
+                        <FaBriefcase className="text-white text-xl" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-bold mb-2 text-white">{exp.title}</h3>
+                        <p className="text-xl text-purple-400 mb-2">{exp.company}</p>
+                        <div className="flex flex-wrap gap-4 text-sm text-gray-400">
+                          <span className="flex items-center gap-1">
+                            <FaMapMarkerAlt /> {exp.location}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <FaCalendarAlt /> {exp.period}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <ul className="space-y-2 mt-4">
+                      {exp.description.map((item, i) => (
+                        <li key={i} className="text-gray-300 flex items-start gap-2">
+                          <span className="text-purple-400 mt-1">▹</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default Experience
+

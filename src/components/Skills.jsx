@@ -1,0 +1,135 @@
+import { motion } from 'framer-motion'
+import { useInView } from 'framer-motion'
+import { useRef } from 'react'
+import {
+  FaReact,
+  FaNode,
+  FaPython,
+  FaJs,
+  FaHtml5,
+  FaCss3Alt,
+  FaGitAlt,
+  FaJava,
+} from 'react-icons/fa'
+import {
+  SiTypescript,
+  SiMongodb,
+  SiPostgresql,
+  SiTailwindcss,
+  SiExpress,
+  SiNextdotjs,
+  SiFirebase,
+  SiMicrosoftazure,
+  SiAmazonaws,
+  SiGooglecloud,
+} from 'react-icons/si'
+
+const Skills = () => {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  const skillCategories = [
+    {
+      title: 'Languages',
+      skills: [
+        { name: 'Java', icon: FaJava, level: 90, color: 'text-orange-500' },
+        { name: 'JavaScript', icon: FaJs, level: 90, color: 'text-yellow-400' },
+        { name: 'TypeScript', icon: SiTypescript, level: 85, color: 'text-blue-500' },
+        { name: 'C/C++', icon: FaJs, level: 85, color: 'text-blue-400' },
+        { name: 'Python', icon: FaPython, level: 85, color: 'text-yellow-400' },
+        { name: 'SQL', icon: SiPostgresql, level: 80, color: 'text-blue-500' },
+        { name: 'HTML/CSS', icon: FaHtml5, level: 95, color: 'text-orange-400' },
+        { name: 'R', icon: FaPython, level: 75, color: 'text-blue-400' },
+      ],
+    },
+    {
+      title: 'Frameworks & Libraries',
+      skills: [
+        { name: 'React', icon: FaReact, level: 90, color: 'text-blue-400' },
+        { name: 'Next.js', icon: SiNextdotjs, level: 85, color: 'text-gray-400' },
+        { name: 'Node.js', icon: FaNode, level: 88, color: 'text-green-500' },
+        { name: 'Express', icon: SiExpress, level: 85, color: 'text-gray-400' },
+        { name: 'Tailwind CSS', icon: SiTailwindcss, level: 85, color: 'text-cyan-400' },
+        { name: 'Firebase', icon: SiFirebase, level: 85, color: 'text-orange-400' },
+        { name: 'OpenAI API', icon: FaPython, level: 80, color: 'text-green-400' },
+        { name: 'YOLOv8', icon: FaPython, level: 85, color: 'text-purple-400' },
+      ],
+    },
+    {
+      title: 'Cloud Platforms & Tools',
+      skills: [
+        { name: 'AWS', icon: SiAmazonaws, level: 80, color: 'text-orange-500' },
+        { name: 'Azure', icon: SiMicrosoftazure, level: 85, color: 'text-blue-500' },
+        { name: 'GCP', icon: SiGooglecloud, level: 75, color: 'text-blue-400' },
+        { name: 'Git', icon: FaGitAlt, level: 90, color: 'text-orange-500' },
+        { name: 'MongoDB', icon: SiMongodb, level: 85, color: 'text-green-500' },
+        { name: 'PostgreSQL', icon: SiPostgresql, level: 80, color: 'text-blue-500' },
+      ],
+    },
+  ]
+
+  return (
+    <section id="skills" ref={ref} className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+            <span className="text-gradient">Skills</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
+        </motion.div>
+
+        <div className="space-y-12">
+          {skillCategories.map((category, categoryIndex) => (
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: categoryIndex * 0.2 }}
+            >
+              <h3 className="text-2xl font-bold mb-6 text-purple-400">{category.title}</h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {category.skills.map((skill, index) => {
+                  const Icon = skill.icon
+                  return (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ duration: 0.4, delay: categoryIndex * 0.2 + index * 0.1 }}
+                      whileHover={{ scale: 1.05 }}
+                      className="glass rounded-xl p-6 card-hover"
+                    >
+                      <div className="flex items-center gap-4 mb-4">
+                        <Icon className={`text-3xl ${skill.color}`} />
+                        <div className="flex-1">
+                          <h4 className="text-lg font-semibold text-white">{skill.name}</h4>
+                          <div className="mt-2 bg-gray-700 rounded-full h-2 overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              animate={isInView ? { width: `${skill.level}%` } : {}}
+                              transition={{ duration: 1, delay: categoryIndex * 0.2 + index * 0.1 + 0.3 }}
+                              className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
+                            />
+                          </div>
+                          <span className="text-sm text-gray-400 mt-1">{skill.level}%</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )
+                })}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default Skills
+
