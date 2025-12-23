@@ -82,7 +82,10 @@ const Navbar = ({ activeSection }) => {
                     layoutId="activeSection"
                     className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400"
                     initial={false}
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    transition={{ 
+                      layout: { type: 'spring', stiffness: 380, damping: 30 },
+                      boxShadow: { duration: 2, repeat: Infinity, ease: 'easeInOut' }
+                    }}
                     animate={{
                       boxShadow: [
                         '0 0 5px rgba(168, 85, 247, 0.5)',
@@ -90,7 +93,6 @@ const Navbar = ({ activeSection }) => {
                         '0 0 5px rgba(168, 85, 247, 0.5)',
                       ],
                     }}
-                    transition={{ duration: 2, repeat: Infinity }}
                   />
                 )}
                 {activeSection !== item.id && (
