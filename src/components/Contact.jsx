@@ -1,36 +1,11 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa'
-import { HiMail } from 'react-icons/hi'
 
 const Contact = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
-      alert('Thank you for your message! I\'ll get back to you soon.')
-      setFormData({ name: '', email: '', message: '' })
-    }, 1000)
-  }
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
-  }
 
   const contactInfo = [
     { icon: FaEnvelope, text: 'sameerahmed0016@gmail.com', href: 'mailto:sameerahmed0016@gmail.com' },
@@ -56,20 +31,17 @@ const Contact = () => {
             <span className="text-gradient">Get In Touch</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
-          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
-          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="max-w-3xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold mb-6 text-white">Contact Information</h3>
+              <h3 className="text-2xl font-bold mb-6 text-white text-center">Contact Information</h3>
               <div className="space-y-4">
                 {contactInfo.map((info, index) => {
                   const Icon = info.icon
@@ -80,14 +52,26 @@ const Contact = () => {
                       initial={{ opacity: 0, x: -20 }}
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
                       transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                      className={`flex items-center gap-4 glass rounded-lg p-4 card-hover ${
+                      whileHover={{ scale: 1.05, x: 5 }}
+                      className={`flex items-center gap-4 glass rounded-lg p-4 card-hover relative overflow-hidden group ${
                         info.href ? 'cursor-pointer' : 'cursor-default'
                       }`}
                     >
-                      <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg">
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/20 group-hover:to-pink-500/20 transition-all duration-300"
+                        animate={{ 
+                          x: ['-100%', '100%'],
+                        }}
+                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                      />
+                      <motion.div 
+                        className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg relative z-10"
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.5 }}
+                      >
                         <Icon className="text-white text-xl" />
-                      </div>
-                      <span className="text-gray-300">{info.text}</span>
+                      </motion.div>
+                      <span className="text-gray-300 relative z-10">{info.text}</span>
                     </motion.a>
                   )
                 })}
@@ -95,8 +79,8 @@ const Contact = () => {
             </div>
 
             <div>
-              <h3 className="text-2xl font-bold mb-6 text-white">Connect With Me</h3>
-              <div className="flex gap-4">
+              <h3 className="text-2xl font-bold mb-6 text-white text-center">Connect With Me</h3>
+              <div className="flex justify-center gap-4">
                 {socialLinks.map(({ icon: Icon, href, label }, index) => (
                   <motion.a
                     key={label}
@@ -117,77 +101,6 @@ const Contact = () => {
               </div>
             </div>
           </motion.div>
-
-          <motion.form
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            onSubmit={handleSubmit}
-            className="glass rounded-xl p-8 space-y-6"
-          >
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                placeholder="Your Name"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                placeholder="your.email@example.com"
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={6}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none"
-                placeholder="Your Message"
-              />
-            </div>
-            <motion.button
-              type="submit"
-              disabled={isSubmitting}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold text-white shadow-lg hover:shadow-purple-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            >
-              {isSubmitting ? (
-                <>
-                  <span className="animate-spin">⏳</span> Sending...
-                </>
-              ) : (
-                <>
-                  <HiMail /> Send Message
-                </>
-              )}
-            </motion.button>
-          </motion.form>
         </div>
       </div>
 

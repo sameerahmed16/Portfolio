@@ -101,22 +101,40 @@ const Skills = () => {
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={isInView ? { opacity: 1, scale: 1 } : {}}
                       transition={{ duration: 0.4, delay: categoryIndex * 0.2 + index * 0.1 }}
-                      whileHover={{ scale: 1.05 }}
-                      className="glass rounded-xl p-6 card-hover"
+                      whileHover={{ scale: 1.1, y: -5, rotate: [0, -2, 2, 0] }}
+                      className="glass rounded-xl p-6 card-hover relative overflow-hidden group"
                     >
-                      <div className="flex items-center gap-4 mb-4">
-                        <Icon className={`text-3xl ${skill.color}`} />
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/20 group-hover:to-pink-500/20 transition-all duration-300"
+                        animate={{ 
+                          opacity: [0.3, 0.6, 0.3],
+                        }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      />
+                      <div className="flex items-center gap-4 mb-4 relative z-10">
+                        <motion.div
+                          whileHover={{ rotate: 360, scale: 1.2 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <Icon className={`text-3xl ${skill.color}`} />
+                        </motion.div>
                         <div className="flex-1">
                           <h4 className="text-lg font-semibold text-white">{skill.name}</h4>
-                          <div className="mt-2 bg-gray-700 rounded-full h-2 overflow-hidden">
+                          <div className="mt-2 bg-gray-700 rounded-full h-2.5 overflow-hidden relative">
                             <motion.div
                               initial={{ width: 0 }}
                               animate={isInView ? { width: `${skill.level}%` } : {}}
                               transition={{ duration: 1, delay: categoryIndex * 0.2 + index * 0.1 + 0.3 }}
-                              className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
-                            />
+                              className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full relative overflow-hidden"
+                            >
+                              <motion.div
+                                className="absolute inset-0 bg-white/30"
+                                animate={{ x: ['-100%', '100%'] }}
+                                transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 0.5 }}
+                              />
+                            </motion.div>
                           </div>
-                          <span className="text-sm text-gray-400 mt-1">{skill.level}%</span>
+                          <span className="text-sm text-gray-400 mt-1 font-semibold">{skill.level}%</span>
                         </div>
                       </div>
                     </motion.div>

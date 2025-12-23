@@ -49,16 +49,29 @@ const Education = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <motion.div
+            <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass rounded-xl p-8 card-hover"
+            whileHover={{ scale: 1.02, y: -5 }}
+            className="glass rounded-xl p-8 card-hover relative overflow-hidden group"
           >
+            <motion.div
+              className="absolute top-0 right-0 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"
+              animate={{ 
+                scale: [1, 1.3, 1],
+                rotate: [0, 180, 360]
+              }}
+              transition={{ duration: 5, repeat: Infinity }}
+            />
             <div className="flex items-start gap-4 mb-6">
-              <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg">
+              <motion.div 
+                className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg"
+                whileHover={{ rotate: 360, scale: 1.1 }}
+                transition={{ duration: 0.5 }}
+              >
                 <FaGraduationCap className="text-white text-2xl" />
-              </div>
+              </motion.div>
               <div className="flex-1">
                 <h3 className="text-2xl font-bold mb-2 text-white">{education.university}</h3>
                 <p className="text-lg text-purple-400 mb-1">{education.degree}</p>
@@ -82,9 +95,20 @@ const Education = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="space-y-6"
           >
-            <div className="glass rounded-xl p-6 card-hover">
-              <div className="flex items-center gap-3 mb-4">
-                <FaAward className="text-yellow-400 text-xl" />
+            <motion.div 
+              className="glass rounded-xl p-6 card-hover relative overflow-hidden group"
+              whileHover={{ scale: 1.02, y: -3 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-yellow-500/0 to-orange-500/0 group-hover:from-yellow-500/10 group-hover:to-orange-500/10 transition-all duration-300"
+              />
+              <div className="flex items-center gap-3 mb-4 relative z-10">
+                <motion.div
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                >
+                  <FaAward className="text-yellow-400 text-xl" />
+                </motion.div>
                 <h4 className="text-xl font-bold text-white">Awards & Honors</h4>
               </div>
               <ul className="space-y-2">
@@ -101,11 +125,22 @@ const Education = () => {
                   </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
-            <div className="glass rounded-xl p-6 card-hover">
-              <div className="flex items-center gap-3 mb-4">
-                <FaBook className="text-blue-400 text-xl" />
+            <motion.div 
+              className="glass rounded-xl p-6 card-hover relative overflow-hidden group"
+              whileHover={{ scale: 1.02, y: -3 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/10 group-hover:to-cyan-500/10 transition-all duration-300"
+              />
+              <div className="flex items-center gap-3 mb-4 relative z-10">
+                <motion.div
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <FaBook className="text-blue-400 text-xl" />
+                </motion.div>
                 <h4 className="text-xl font-bold text-white">Relevant Coursework</h4>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -114,14 +149,15 @@ const Education = () => {
                     key={index}
                     initial={{ opacity: 0, scale: 0 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.8 + index * 0.05 }}
-                    className="px-3 py-1 bg-white/10 rounded-full text-sm text-gray-300"
+                    transition={{ delay: 0.8 + index * 0.05, type: "spring", stiffness: 200 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    className="px-3 py-1 bg-white/10 rounded-full text-sm text-gray-300 hover:bg-white/20 transition-all cursor-default"
                   >
                     {course}
                   </motion.span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

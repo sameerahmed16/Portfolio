@@ -10,7 +10,7 @@ const Projects = () => {
   const projects = [
     {
       title: 'Notescope - HackPSU 2024',
-      description: 'Awarded Peraton Challenge Most Creative Implementation of Generative AI. Developed an AI-powered notebook application leveraging OpenAI API, Next.js, Node.js, Firebase, and MongoDB to deliver real-time lecture transcription, AI-driven summarization, and intelligent Q&A support during a 24-hour hackathon.',
+      description: 'AI-powered notebook app with real-time transcription & intelligent Q&A. Built with Next.js, OpenAI API, and Firebase during a 24-hour hackathon.',
       technologies: ['Next.js', 'Node.js', 'Firebase', 'MongoDB', 'OpenAI API'],
       image: '📝',
       link: 'https://devpost.com/software/notescope',
@@ -19,7 +19,7 @@ const Projects = () => {
     },
     {
       title: 'Seeker - Design Showcase',
-      description: 'Awarded Most Innovative Solution. Engineered an AI-powered Foreign Object Detection and Removal system using YOLOv8, Raspberry Pi, real-time object tracking, alerting system, and depth mapping, reducing airport debris response time from over 30 minutes to under 5 minutes.',
+      description: 'AI-powered detection system reducing airport debris response time from 30+ minutes to under 5 minutes. Built with YOLOv8 & Raspberry Pi.',
       technologies: ['YOLOv8', 'Python', 'Raspberry Pi', 'Computer Vision'],
       image: '🔍',
       link: null,
@@ -28,7 +28,7 @@ const Projects = () => {
     },
     {
       title: 'Solar-Powered Poultry Health Monitoring',
-      description: 'Awarded Best Innovation in Agricultural Sciences. Built and trained CNN-based computer vision models for automated poultry health detection using optical and thermal image data, developing data preprocessing workflows, labeling strategies, training, and real-time inference pipelines.',
+      description: 'CNN-based computer vision system for automated poultry health monitoring. Trained models using optical & thermal imaging with real-time inference.',
       technologies: ['CNN', 'Python', 'Computer Vision', 'Raspberry Pi', 'TensorFlow'],
       image: '🐔',
       link: 'https://sites.psu.edu/lfshowcasefa25/2025/12/10/solar-powered-poultry-health-monitoring-device/',
@@ -50,9 +50,6 @@ const Projects = () => {
             <span className="text-gradient">Projects</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
-          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-            A collection of projects I've worked on, showcasing my skills and creativity
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -62,13 +59,27 @@ const Projects = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
+              whileHover={{ y: -15, scale: 1.02 }}
               className="group"
             >
-              <div className="glass rounded-xl overflow-hidden h-full card-hover flex flex-col">
+              <div className="glass rounded-xl overflow-hidden h-full card-hover flex flex-col relative">
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/20 group-hover:to-pink-500/20 transition-all duration-300"
+                  animate={{ opacity: [0.3, 0.6, 0.3] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                />
                 <div className={`h-48 bg-gradient-to-br ${project.color} flex items-center justify-center text-6xl relative overflow-hidden`}>
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                  <span className="relative z-10">{project.image}</span>
+                  <motion.div 
+                    className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                  />
+                  <motion.span 
+                    className="relative z-10"
+                    animate={{ rotate: [0, 5, -5, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, repeatDelay: 2 }}
+                  >
+                    {project.image}
+                  </motion.span>
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-start justify-between mb-2">

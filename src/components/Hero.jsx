@@ -72,7 +72,7 @@ const Hero = () => {
           variants={itemVariants}
           className="text-lg sm:text-xl text-gray-400 mb-8 max-w-2xl mx-auto"
         >
-          Building innovative solutions with AI, full-stack development, and cutting-edge technology
+          Crafting innovative AI & full-stack solutions
         </motion.p>
 
         <motion.div
@@ -80,27 +80,38 @@ const Hero = () => {
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
           <motion.a
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.1, y: -3 }}
             whileTap={{ scale: 0.95 }}
             href="#contact"
-            className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold shadow-lg hover:shadow-purple-500/50 transition-all"
+            className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold shadow-lg hover:shadow-purple-500/70 transition-all relative overflow-hidden group"
           >
-            Get In Touch
+            <motion.span
+              className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"
+              animate={{ x: ['-100%', '100%'] }}
+              transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 2 }}
+            />
+            <span className="relative z-10">Get In Touch</span>
           </motion.a>
           <motion.a
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.1, y: -3 }}
             whileTap={{ scale: 0.95 }}
             href="/SameerAhmed_Resume.pdf"
             download
-            className="px-8 py-3 glass rounded-full font-semibold flex items-center gap-2 hover:bg-white/20 transition-all"
+            className="px-8 py-3 glass rounded-full font-semibold flex items-center gap-2 hover:bg-white/30 hover:shadow-lg hover:shadow-purple-500/30 transition-all"
           >
-            <FaDownload /> Resume
+            <motion.div
+              animate={{ y: [0, -2, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <FaDownload />
+            </motion.div>
+            Resume
           </motion.a>
         </motion.div>
 
         <motion.div
           variants={itemVariants}
-          className="flex justify-center gap-6 mb-12"
+          className="flex justify-center gap-6 mb-20"
         >
           {socialLinks.map(({ icon: Icon, href, label }) => (
             <motion.a
@@ -108,25 +119,42 @@ const Hero = () => {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.2, y: -5 }}
+              whileHover={{ scale: 1.3, y: -8, rotate: 360 }}
               whileTap={{ scale: 0.9 }}
-              className="text-3xl text-gray-400 hover:text-purple-400 transition-colors"
+              className="text-3xl text-gray-400 hover:text-purple-400 transition-all relative group"
               aria-label={label}
             >
-              <Icon />
+              <motion.div
+                className="absolute inset-0 bg-purple-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity"
+                animate={{ scale: [1, 1.5, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <Icon className="relative z-10" />
             </motion.a>
           ))}
         </motion.div>
 
         <motion.div
           variants={itemVariants}
-          animate={{ y: [0, 10, 0] }}
+          animate={{ y: [0, 15, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
         >
-          <a href="#about" className="text-gray-400 hover:text-purple-400 transition-colors">
-            <HiArrowDown className="text-4xl" />
-          </a>
+          <motion.a 
+            href="#about" 
+            className="text-gray-400 hover:text-purple-400 transition-colors block"
+            whileHover={{ scale: 1.2 }}
+          >
+            <motion.div
+              animate={{ 
+                opacity: [0.5, 1, 0.5],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <HiArrowDown className="text-4xl drop-shadow-lg" />
+            </motion.div>
+          </motion.a>
         </motion.div>
       </motion.div>
     </section>

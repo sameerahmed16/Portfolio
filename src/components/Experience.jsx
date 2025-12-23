@@ -14,9 +14,9 @@ const Experience = () => {
       location: 'Vienna, VA',
       period: 'Jun 2025 - Aug 2025',
       description: [
-        'Designed and deployed Microsoft Power Apps and Power Automate solutions to streamline FEMA subcontractor record management and data integration, reducing processing time and enhancing overall workflow efficiency across teams',
-        'Automated workflows that reduced manual data entry by over 40% and introduced automatic error detection, integrating Power Platform solutions with SharePoint and Microsoft Dataverse, enhancing system efficiency and scalability',
-        'Collaborated with cross-functional teams to deliver user-friendly, accessible applications, integrate external APIs, and provide technical support and training to 50+ end-users, ensuring long-term system reliability and successful adoption',
+        'Designed Power Apps solutions reducing manual data entry by 40%+',
+        'Integrated Power Platform with SharePoint & Dataverse for scalable workflows',
+        'Delivered user-friendly apps with 50+ trained end-users',
       ],
     },
     {
@@ -25,8 +25,8 @@ const Experience = () => {
       location: 'Karachi, Pakistan',
       period: 'Jul 2024 - Aug 2024',
       description: [
-        'Designed a team selection model and business plan for a sports league, optimizing player combinations and replacements for 100+ athletes, receiving positive feedback from 5 key stakeholders for its strategic value following presentation',
-        'Collaborated with QA engineers to design and execute test cases, leveraging Jira for bug tracking, sprint planning, and backlog management, while gaining experience with Agile methodologies and improving overall product quality',
+        'Built team selection model optimizing 100+ athlete combinations',
+        'Collaborated with QA using Agile & Jira for sprint management',
       ],
     },
     {
@@ -35,8 +35,8 @@ const Experience = () => {
       location: 'State College, PA',
       period: 'Dec 2023 - Present',
       description: [
-        'Provided technical support for 20+ weekly hardware, software, and network issues, leveraging tools such as ServiceNow, Amazon Connect, Office 365, and Digital Identity Management Center to ensure rapid resolution and minimize downtime',
-        'Performed diagnostics, system configurations, software installations, and account management for both Windows and macOS environments, achieving a 95%+ user satisfaction rate across diverse student and faculty support requests',
+        'Resolved 20+ weekly tech issues with 95%+ satisfaction rate',
+        'Managed Windows & macOS systems using ServiceNow & Office 365',
       ],
     },
   ]
@@ -76,14 +76,22 @@ const Experience = () => {
 
                 {/* Content card */}
                 <div
-                  className={`ml-20 md:ml-0 md:w-5/12 ${
+                  className={`ml-20 md:ml-0 md:w-5/12 group ${
                     index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'
                   }`}
                 >
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className="glass rounded-xl p-6 card-hover"
+                    whileHover={{ scale: 1.03, y: -5 }}
+                    className="glass rounded-xl p-6 card-hover relative overflow-hidden"
                   >
+                    <motion.div
+                      className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+                      animate={{ 
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 90, 0]
+                      }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                    />
                     <div className="flex items-start gap-4 mb-4">
                       <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg">
                         <FaBriefcase className="text-white text-xl" />
