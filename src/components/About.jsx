@@ -7,18 +7,58 @@ const About = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="about" ref={ref} className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" ref={ref} className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-10 left-20 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.4, 1],
+            opacity: [0.2, 0.4, 0.2],
+            y: [0, 30, 0],
+          }}
+          transition={{ duration: 7, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute bottom-10 right-20 w-36 h-36 bg-pink-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.35, 0.2],
+            y: [0, -40, 0],
+          }}
+          transition={{ duration: 9, repeat: Infinity }}
+        />
+      </div>
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 relative"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.1, 0.2, 0.1],
+            }}
+            transition={{ duration: 4, repeat: Infinity }}
+          >
+            <div className="w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>
+          </motion.div>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4 relative z-10">
             <span className="text-gradient">About Me</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
+          <div className="relative z-10">
+            <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto mb-2"></div>
+            <motion.div
+              className="w-12 h-1 bg-gradient-to-r from-pink-400 to-purple-400 mx-auto"
+              animate={{
+                width: ['48px', '96px', '48px'],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -49,8 +89,22 @@ const About = () => {
                 />
               </div>
             </motion.div>
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-purple-500/30 rounded-full blur-2xl -z-10"></div>
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-pink-500/30 rounded-full blur-2xl -z-10"></div>
+            <motion.div 
+              className="absolute -top-4 -right-4 w-24 h-24 bg-purple-500/30 rounded-full blur-2xl -z-10"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{ duration: 4, repeat: Infinity }}
+            />
+            <motion.div 
+              className="absolute -bottom-4 -left-4 w-32 h-32 bg-pink-500/30 rounded-full blur-2xl -z-10"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+            />
           </motion.div>
 
           <motion.div
@@ -63,9 +117,23 @@ const About = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="glass rounded-xl p-6 card-hover"
+              className="glass rounded-xl p-6 card-hover relative overflow-hidden group"
             >
-              <p className="text-lg text-gray-200 leading-relaxed">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-pink-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:via-pink-500/10 group-hover:to-purple-500/10 transition-all duration-500"
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                }}
+                transition={{ duration: 5, repeat: Infinity }}
+              />
+              <motion.div
+                className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500"
+                animate={{
+                  x: ['-100%', '100%'],
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+              <p className="text-lg text-gray-200 leading-relaxed relative z-10">
                 I'm a senior Computer Science major at Penn State with a minor in Engineering Leadership Development, passionate about building technology that solves real-world problems. My experience spans software development, AI, automation, and IT systems, with hands-on work across industry, research, and campus operations. I've contributed to impactful projects for organizations like FEMA and led award-winning initiatives in AI and robotics. Driven by curiosity and collaboration, I enjoy creating efficient, user-focused solutions that make a meaningful impact.
               </p>
             </motion.div>

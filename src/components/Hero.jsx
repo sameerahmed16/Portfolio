@@ -26,12 +26,72 @@ const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Animated Background */}
+      {/* Enhanced Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style={{ animationDelay: '4s' }}></div>
+        <motion.div 
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20"
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, 50, 0],
+            y: [0, -50, 0],
+          }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        <motion.div 
+          className="absolute top-1/3 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20"
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, -50, 0],
+            y: [0, 50, 0],
+          }}
+          transition={{ duration: 10, repeat: Infinity, delay: 2 }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20"
+          animate={{
+            scale: [1, 1.1, 1],
+            x: [0, 30, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{ duration: 12, repeat: Infinity, delay: 4 }}
+        />
+        <motion.div 
+          className="absolute top-1/2 left-1/2 w-64 h-64 bg-cyan-500 rounded-full mix-blend-multiply filter blur-2xl opacity-10"
+          animate={{
+            scale: [1, 1.5, 1],
+            rotate: [0, 180, 360],
+          }}
+          transition={{ duration: 15, repeat: Infinity }}
+        />
       </div>
+      
+      {/* Floating orbs */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full blur-2xl opacity-20"
+          style={{
+            width: `${Math.random() * 200 + 100}px`,
+            height: `${Math.random() * 200 + 100}px`,
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            background: i % 2 === 0 
+              ? 'radial-gradient(circle, rgba(168, 85, 247, 0.4), transparent)'
+              : 'radial-gradient(circle, rgba(236, 72, 153, 0.4), transparent)',
+          }}
+          animate={{
+            x: [0, (Math.random() - 0.5) * 300],
+            y: [0, (Math.random() - 0.5) * 300],
+            scale: [1, 1.5, 1],
+            opacity: [0.1, 0.3, 0.1],
+          }}
+          transition={{
+            duration: Math.random() * 10 + 15,
+            repeat: Infinity,
+            delay: Math.random() * 5,
+          }}
+        />
+      ))}
 
       <motion.div
         variants={containerVariants}
@@ -54,16 +114,42 @@ const Hero = () => {
 
         <motion.h1
           variants={itemVariants}
-          className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6"
+          className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 relative"
         >
-          <span className="text-gradient animate-gradient bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent bg-[length:200%_auto]">
+          <motion.span
+            className="text-gradient animate-gradient bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent bg-[length:200%_auto] inline-block"
+            animate={{
+              filter: [
+                'drop-shadow(0 0 10px rgba(168, 85, 247, 0.5))',
+                'drop-shadow(0 0 20px rgba(236, 72, 153, 0.8))',
+                'drop-shadow(0 0 10px rgba(168, 85, 247, 0.5))',
+              ],
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
+          >
             Sameer Ahmed
-          </span>
+          </motion.span>
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-3xl -z-10"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{ duration: 4, repeat: Infinity }}
+          />
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
-          className="text-xl sm:text-2xl md:text-3xl mb-4 text-gray-300"
+          className="text-xl sm:text-2xl md:text-3xl mb-4 text-gray-300 relative"
+          animate={{
+            textShadow: [
+              '0 0 10px rgba(168, 85, 247, 0.3)',
+              '0 0 20px rgba(236, 72, 153, 0.5)',
+              '0 0 10px rgba(168, 85, 247, 0.3)',
+            ],
+          }}
+          transition={{ duration: 3, repeat: Infinity }}
         >
           Computer Science Student & Software Developer
         </motion.p>
@@ -80,17 +166,32 @@ const Hero = () => {
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
           <motion.a
-            whileHover={{ scale: 1.1, y: -3 }}
+            whileHover={{ scale: 1.15, y: -5 }}
             whileTap={{ scale: 0.95 }}
             href="#contact"
-            className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold shadow-lg hover:shadow-purple-500/70 transition-all relative overflow-hidden group"
+            className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold shadow-lg hover:shadow-purple-500/70 transition-all relative overflow-hidden group glow-purple"
           >
             <motion.span
               className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"
               animate={{ x: ['-100%', '100%'] }}
               transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 2 }}
             />
-            <span className="relative z-10">Get In Touch</span>
+            <motion.div
+              className="absolute inset-0 bg-white/20"
+              animate={{
+                x: ['-100%', '100%'],
+              }}
+              transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
+            />
+            <span className="relative z-10 flex items-center gap-2">
+              Get In Touch
+              <motion.span
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                →
+              </motion.span>
+            </span>
           </motion.a>
           <motion.a
             whileHover={{ scale: 1.1, y: -3 }}

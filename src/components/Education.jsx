@@ -40,12 +40,31 @@ const Education = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 relative"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.1, 0.2, 0.1],
+            }}
+            transition={{ duration: 4, repeat: Infinity }}
+          >
+            <div className="w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>
+          </motion.div>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4 relative z-10">
             <span className="text-gradient">Education</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
+          <div className="relative z-10">
+            <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto mb-2"></div>
+            <motion.div
+              className="w-12 h-1 bg-gradient-to-r from-pink-400 to-purple-400 mx-auto"
+              animate={{
+                width: ['48px', '96px', '48px'],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
